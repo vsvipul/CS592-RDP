@@ -32,14 +32,16 @@ getValue(key)
 ### Pseudocode for putvalue
 ```
 putvalue(key, value, force)
-if (force == 1)
-    insert <key, value> into local hashmap m.
-else
-    shardId = get shard id where this <key,value> should be stored from shardCoord.
-    if (shardId == myShardId)
+{
+    if (force == 1)
         insert <key, value> into local hashmap m.
     else
-        send a request to shardId Shard and put the <key,value> in its hashmap with force=1.
+        shardId = get shard id where this <key,value> should be stored from shardCoord.
+        if (shardId == myShardId)
+            insert <key, value> into local hashmap m.
+        else
+            send a request to shardId Shard and put the <key,value> in its hashmap with force=1.
+}
 ```
 
 ### UML Class Diagram
